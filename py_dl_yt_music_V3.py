@@ -1,8 +1,6 @@
 #---------------------------------------------------
 #Author : yindiana.fr |yndiana.contact@gmail.com
 #Creation date : 11/10/2023
-#Update date :
-#Update : 
 #Description : tool for music downloading
 #---------------------------------------------------
 
@@ -31,5 +29,8 @@ def telecharger_audio_youtube(url):
 # Demander à l'utilisateur d'entrer l'URL de la vidéo YouTube
 url_audio_youtube = input("Entrez le(s) URL(s) de la musique YouTube (séparés par des virgules) : ").split(",")
 
-for urls in url_audio_youtube :
-    telecharger_audio_youtube(urls)
+total_urls = len(url_audio_youtube)  # Calculer le nombre total d'URLs
+
+for i, url in enumerate(url_audio_youtube):
+    print(f"Traitement de l'URL {i + 1}/{total_urls}...")
+    telecharger_audio_youtube(url)
