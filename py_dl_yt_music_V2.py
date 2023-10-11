@@ -22,7 +22,7 @@ def telecharger_audio_youtube(url):
         
         print("Téléchargement de l'audio de", titre_video + " en cours...")
         stream = yt.streams.filter(only_audio=True, file_extension='mp4').first()
-        stream.download(output_path='audio', filename=str(titre_video))
+        stream.download(output_path='audio', filename=str(titre_video + ".mp3"))
         print("Téléchargement terminé. Le fichier audio est enregistré sous :", titre_video + ".mp3")
     
     except Exception as e:
