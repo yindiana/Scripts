@@ -8,10 +8,10 @@ services:
     volumes:
       - /backup/nextcloud/db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=?????
-      - MYSQL_PASSWORD=?????
-      - MYSQL_DATABASE=?????
-      - MYSQL_USER=?????
+      - MYSQL_ROOT_PASSWORD=value
+      - MYSQL_PASSWORD=value
+      - MYSQL_DATABASE=value
+      - MYSQL_USER=value
 
   nextcloud:
     image: nextcloud
@@ -23,10 +23,10 @@ services:
     volumes:
       - /backup/nextcloud/html:/var/www/html
     environment:
-      - MYSQL_PASSWORD=?????
-      - MYSQL_DATABASE=?????
-      - MYSQL_USER=?????
-      - MYSQL_HOST=db
+      - MYSQL_PASSWORDvalue
+      - MYSQL_DATABASEvalue
+      - MYSQL_USERvalue
+      - MYSQL_HOST=value
   
   reverseproxydb:
     image: mariadb
@@ -36,10 +36,10 @@ services:
     volumes:
      - /backup/nginx/db:/var/lib/mysql
     environment:
-     - MYSQL_ROOT_PASSWORD=$NEXTCLOUD_MYSQL_ROOT_PASSWORD  # Mot de passe de l'utilisateur root de mariadb
-     - MYSQL_DATABASE=$NEXTCLOUD_MYSQL_DATABASE  # Nom de la base de données à créer à l'initialisation du conteneur
-     - MYSQL_USER=$NEXTCLOUD_MYSQL_USER  # Nom de l'utilisateur de la base de données créée
-     - MYSQL_PASSWORD=$NEXTCLOUD_MYSQL_PASSWORD  # Mot de passe de l'utilisateur créé  
+     - MYSQL_ROOT_PASSWORD=value  # Mot de passe de l'utilisateur root de mariadb
+     - MYSQL_DATABASE=value  # Nom de la base de données à créer à l'initialisation du conteneur
+     - MYSQL_USER=value  # Nom de l'utilisateur de la base de données créée
+     - MYSQL_PASSWORD=value  # Mot de passe de l'utilisateur créé  
 
   reverseproxy:
     image: 'jc21/nginx-proxy-manager:latest'
@@ -53,3 +53,8 @@ services:
     volumes:
       - /backup/nginx/data:/data
       - /backup/nginx/letsencrypt:/etc/letsencrypt
+    environment:
+      - MYSQL_ROOT_PASSWORD=value
+      - MYSQL_DATABASE=value
+      - MYSQL_USER=value
+      - MYSQL_HOST=value
