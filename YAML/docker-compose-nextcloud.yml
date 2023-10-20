@@ -1,3 +1,10 @@
+#Penser à créer les volumes sur votre espace de stockage :
+#/backup/nextcloud/db
+#/backup/nextcloud/html
+#/backup/nginx/db
+#/backup/nginx/data
+#/backup/nginx/letsencrypt
+
 version: '3'
 
 services:
@@ -8,10 +15,10 @@ services:
     volumes:
       - /backup/nextcloud/db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=value
-      - MYSQL_PASSWORD=value
-      - MYSQL_DATABASE=value
-      - MYSQL_USER=value
+      - MYSQL_ROOT_PASSWORD=value  # Mot de passe de l'utilisateur root de mariadb
+      - MYSQL_DATABASE=bddnextcloud  # Nom de la base de données à créer à l'initialisation du conteneur
+      - MYSQL_USER=value  # Nom de l'utilisateur de la base de données créé
+      - MYSQL_PASSWORD=value  # Mot de passe de l'utilisateur créé
 
   nextcloud:
     image: nextcloud
@@ -23,12 +30,12 @@ services:
     volumes:
       - /backup/nextcloud/html:/var/www/html
     environment:
-      - MYSQL_PASSWORDvalue
-      - MYSQL_DATABASEvalue
-      - MYSQL_USERvalue
-      - MYSQL_HOST=value
+      - MYSQL_PASSWORD=value  # Mot de passe de l'utilisateur de mariadb créé
+      - MYSQL_DATABASE=bddnextcloud  # Nom de la base de données créer à l'initialisation du conteneur
+      - MYSQL_HOST=dbnextcloud  # Nom d'hôte du conteneur de la base de données créé
+      - MYSQL_USER=value  # Mot de passe de l'utilisateur créé
   
-  reverseproxydb:
+  dbreverseproxy:
     image: mariadb
     container_name: home_assistant_db
     restart: always
@@ -37,8 +44,8 @@ services:
      - /backup/nginx/db:/var/lib/mysql
     environment:
      - MYSQL_ROOT_PASSWORD=value  # Mot de passe de l'utilisateur root de mariadb
-     - MYSQL_DATABASE=value  # Nom de la base de données à créer à l'initialisation du conteneur
-     - MYSQL_USER=value  # Nom de l'utilisateur de la base de données créée
+     - MYSQL_DATABASE=bddreverseproxy  # Nom de la base de données à créer à l'initialisation du conteneur
+     - MYSQL_USER=value  # Nom de l'utilisateur de la base de données créé
      - MYSQL_PASSWORD=value  # Mot de passe de l'utilisateur créé  
 
   reverseproxy:
@@ -49,12 +56,12 @@ services:
       - '81:81'
       - '443:443'
     links:
-      - reverseproxydb
+      - dbreverseproxy
     volumes:
       - /backup/nginx/data:/data
       - /backup/nginx/letsencrypt:/etc/letsencrypt
     environment:
-      - MYSQL_ROOT_PASSWORD=value
-      - MYSQL_DATABASE=value
-      - MYSQL_USER=value
-      - MYSQL_HOST=value
+      - MYSQL_PASSWORD=value  # Mot de passe de l'utilisateur de mariadb créé
+      - MYSQL_DATABASE=bddreverseproxy  # Nom de la base de données créer à l'initialisation du conteneur
+      - MYSQL_HOST=dbreverseproxy  # Nom d'hôte du conteneur de la base de données créé
+      - MYSQL_USER=value  # Mot de passe de l'utilisateur créé
