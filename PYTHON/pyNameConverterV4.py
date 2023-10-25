@@ -16,7 +16,18 @@ def rename_files(directory_path):
     for filename in os.listdir(directory_path):
         if os.path.isfile(os.path.join(directory_path, filename)):
             new_filename = filename.lower().replace(" ", "_").replace("'", "_").replace('"', "_").replace("-", "_").replace(",","_")
-            os.rename(os.path.join(directory_path, filename), os.path.join(directory_path, new_filename))
+            new_filepath = os.path.join(directory_path, new_filename)
+            if os.path.exists(new_filepath) and new_filepath != os.path.join(directory_path, filename):
+                try:
+                    print(f"filename = {filename} ")
+                    print(f"new_filename = {new_filename} ")
+                    os.remove(new_filepath)
+                    os.rename(os.path.join(directory_path, filename), os.path.join(directory_path, new_filename))
+                except OSError as e:
+                        print(f"Erreur lors de la suppression du fichier : {e}")
+                        continue
+            else:
+                os.rename(os.path.join(directory_path, filename), os.path.join(directory_path, new_filename))
             
 if __name__ == "__main__":
     paths = input("Entrez les chemins des dossiers (séparés par des virgules) : ").split(',')
