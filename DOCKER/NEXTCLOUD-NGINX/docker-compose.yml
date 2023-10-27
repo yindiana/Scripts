@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  dbnextcloud:
+    image: mariadb:latest
+    container_name: db_nextcloud
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - /opt/nextcloud/db:/var/lib/mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD  # Mot de passe de l'utilisateur root de mariadb
+     - MYSQL_DATABASE=$MYSQL_DATABASE  # Nom de la base de données à créer à l'initialisation du conteneur
+     - MYSQL_USER=$MYSQL_USER  # Nom de l'utilisateur de la base de données créée
+     - MYSQL_PASSWORD=$MYSQL_PASSWORD  # Mot de passe de l'utilisateur créé 
+
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    restart: always
+    links:
+      - dbnextcloud
+    volumes:
+      - /opt/nextcloud/html:/var/www/html
+    environment:
+     - DB_MYSQL_HOST=$HOSTNAME_DATABASE
+     - DMYSQL_USER=$MYSQL_USER  # Nom de l'utilisateur de la base de données créée
+     - MYSQL_PASSWORD=$MYSQL_PASSWORD  # Mot de passe de l'utilisateur créé
+     - MYSQL_DATABASE=$MYSQL_DATABASE  # Nom de la base de données à créer à l'initialisation du conteneur
+  
+  reverseproxydb:
+    image: mariadb:latest
+    container_name: db_nginx
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+     - /opt/nginx/db:/var/lib/mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD  # Mot de passe de l'utilisateur root de mariadb
+     - MYSQL_DATABASE=$MYSQL_DATABASE  # Nom de la base de données à créer à l'initialisation du conteneur
+     - MYSQL_USER=$MYSQL_USER  # Nom de l'utilisateur de la base de données créée
+     - MYSQL_PASSWORD=$MYSQL_PASSWORD  # Mot de passe de l'utilisateur créé  
+
+  reverseproxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx
+    restart: always
+    ports:
+      - '80:80' # ne pas modifier
+      - '81:81'
+      - '443:443' # ne pas modifier
+    links:
+      - reverseproxydb
+    environment:
+     - DB_MYSQL_HOST=$HOSTNAME_DATABASE
+     - DB_MYSQL_PORT=3306
+     - DMYSQL_USER=$MYSQL_USER  # Nom de l'utilisateur de la base de données créée
+     - MYSQL_PASSWORD=$MYSQL_PASSWORD  # Mot de passe de l'utilisateur créé
+     - MYSQL_DATABASE=$MYSQL_DATABASE  # Nom de la base de données à créer à l'initialisation du conteneur
+    volumes:
+      - /opt/nginx/data:/data
+      - /opt/nginx/letsencrypt:/etc/letsencrypt
