@@ -1,0 +1,19 @@
+version: "2.1"
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Etc/UTC
+    volumes:
+    #Il faut créer les path sur le server avant le déploiement
+      - /path/to/appdata/config:/config #Dossier de configuration de duplicati
+      - /path/to/backups:/backups #Dossier de backup
+      - /path/to/source1:/source/service_name_1  #service ou dossier que vous souhaitez sauvegarder
+      - /path/to/source2:/source/service_name_2  #service ou dossier que vous souhaitez sauvegarder
+      - /:/source/host  #permet d'accéder à tous les dossiers du système
+    ports:
+      - 8200:8200
+    restart: always
