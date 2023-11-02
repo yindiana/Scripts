@@ -1,0 +1,2 @@
+motsOuPhrases()
+boucleParseDictionnaire()
