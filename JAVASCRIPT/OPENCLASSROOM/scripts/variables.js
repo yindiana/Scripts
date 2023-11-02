@@ -1,18 +1,14 @@
+// Déclarer une variable motUtilisateur qui sert à récupérer le mot de l'utilisateur
+let motUtilisateur;
+
 // Déclarez une variable listeMots qui est un tableau
 let listeMots = ["Cachalot","Pétunia","Serviette"]
 
-// Déclarez une deuxième variable score, initialisée à 0, qui contiendra le nombre de mots correctement tapés par l’utilisateur
-let score = 0
+// Déclarez une variable listePhrases qui est un tableau
+let listePhrases = ["Je suis aveugle", "Mon nom est bob", "Invites moi au ciné"]
 
-//Déclarer une variable i qui est utilisé dans la boucle for
+// utiliser pour la boucle les fonction utilisant un dictionnaire et la fonction boucleParseDictionnaire
 let i = 0
-
-// Déclarer une variable motUtilisateur qui sert à récupérer le mot de l'utilisateur
-let motUtilisateur
-
-//Déclarer une variable pour le testMotUtilisateur === TRUE or FALSE
-let ComparaisonMotUtilisateur
-
-//Déclarer deux variables pour les résultats des deux fonctions
-let ResultUpdateMotUtilisateur
-let ResultTestMotUtilisateur
+;
+//utiliser pour les fonctions comparaisonMotUtilisateur et afficherResultat
+let score = 0
