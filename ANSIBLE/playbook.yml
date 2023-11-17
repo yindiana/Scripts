@@ -1,0 +1,19 @@
+---
+- name: Hello world
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create file in /home/YI0722AL/formation/testPlaybook/file.txt
+      include_role:
+        name: file
+        tasks_from: create-file.yml
+      when: filename is defined and filename.endwith(*.txt)
+
+    - name: Liste les fichiers d'un dossier
+      tree:
+        path: /home/YI0722AL/formation/testPlaybook/
+      register: result
+
+    - name: register
+      ansible.builtin.debug:
+        var: result
