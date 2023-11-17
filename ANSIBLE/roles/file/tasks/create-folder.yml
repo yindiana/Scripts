@@ -1,0 +1,6 @@
+- name: Create repository /home/YI0722AL/formation/testPlaybook
+  file:
+    path: //home/YI0722AL/formation/testPlaybook
+    state: directory
+    owner: YI0722AL
+    mode: u=rwx,g=r,o=r
