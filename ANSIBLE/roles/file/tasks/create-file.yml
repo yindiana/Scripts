@@ -1,0 +1,6 @@
+- name: Create file in /home/YI0722AL/formation/testPlaybook
+  file:
+    path: /home/YI0722AL/formation/testPlaybook/file.txt
+    state: touch
+    owner: YI0722AL
+    mode: u=rwx,g=r,o=r
