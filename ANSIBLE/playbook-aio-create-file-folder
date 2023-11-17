@@ -1,0 +1,16 @@
+---
+- name:  Create repository and file
+  hosts: localhost
+  tasks:
+  - name: Create repository /home/YI0722AL/formation/testPlaybook
+    file:
+      path: //home/YI0722AL/formation/testPlaybook
+      state: directory
+      owner: YI0722AL
+      mode: u=rwx,g=r,o=r
+  - name: Create file in /home/YI0722AL/formation/testPlaybook
+      file:
+        path: /home/YI0722AL/formation/testPlaybook/file.txt
+        state: touch
+        owner: YI0722AL
+        mode: u=rwx,g=r,o=r
