@@ -1,0 +1,12 @@
+---
+- name:  Create repository and file
+  hosts: localhost
+  tasks:
+  - name: Create repository /home/YI0722AL/formation/testPlaybook
+    include_role:
+      name: file
+      tasks_from: create-folder.yml
+  - name: Create file in /home/YI0722AL/formation/testPlaybook/file.txt
+    include_role:
+      name: file
+      tasks_from: create-file.yml
