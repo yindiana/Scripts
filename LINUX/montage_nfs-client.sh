@@ -15,3 +15,5 @@ sudo mount -t nfs $ip_serveur_nfs:$nom_partage_nfs $pointdemontage
 
 #persistance avec le fstab
 echo "$ip_serveur_nfs:$nom_partage_nfs $pointdemontage     nfs     auto,_netdev,,nofail        0 0" >> /etc/fstab
+
+#source : https://www.tutos.eu/9011
