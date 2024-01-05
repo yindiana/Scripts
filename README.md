@@ -1,2 +1,2 @@
-# pythonScripts
-scripts python du quotidien
+# Scripts
+scripts du quotidien
