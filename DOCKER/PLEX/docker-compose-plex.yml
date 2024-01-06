@@ -21,3 +21,4 @@ services:
     restart: unless-stopped
 #/opt/plex/config /opt/plex/films /opt/plex/series /opt/plex/musics /opt/plex/dcmi
 #port par defaut : 32400
+#if error : This XML file does not appear to have any style information associated with it. The document tree is shown below --> http://ipaddress:32400/manage
