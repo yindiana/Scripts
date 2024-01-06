@@ -20,3 +20,4 @@ services:
       - /opt/plex/dcmi:/images
     restart: unless-stopped
 #/opt/plex/config /opt/plex/films /opt/plex/series /opt/plex/musics /opt/plex/dcmi
+#port par defaut : 32400
