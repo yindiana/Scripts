@@ -6,3 +6,4 @@
 4/ lancer le script Scripts/DOCKER/SHELL/volume_creation qui se chargera de créer les volumes docker
 #/opt/qbittorrent/config /opt/qbittorrent/downloads
 5/ lancer le docker-compose.yml
+#pour avoir le user et le mdp, aller sur le serveur, faire un docker logs qbittorrent-docker-id
