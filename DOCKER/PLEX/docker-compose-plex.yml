@@ -13,10 +13,10 @@ services:
       #- PLEX_CLAIM= #optional
     volumes:
       - /opt/plex/config:/config
-      - /opt/plex/tv:/tv
-      - /opt/plex/movies:/movies
+      - /opt/plex/films:/movies
       - /opt/plex/series:/series
-      - /opt/plex/music:/music
+      - /opt/plex/musics:/music
       - /opt/plex/onrop:/onrop
-      - /opt/plex/images:/images
+      - /opt/plex/dcmi:/images
     restart: unless-stopped
+#/opt/plex/config /opt/plex/films /opt/plex/series /opt/plex/musics /opt/plex/dcmi
